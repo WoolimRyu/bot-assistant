@@ -43,4 +43,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.get('/webhook', function(req, res) {
+if (req.query['hub.verify_token'] === 'MY_VERIFY_TOKEN') {
+    return res.send(req.query['hub.challenge']);
+}
+return res.send('Error, wrong validation token');
+});
+
+
 module.exports = app;
